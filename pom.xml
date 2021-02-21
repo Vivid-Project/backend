@@ -52,22 +52,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-      <!-- <plugin> -->
-      <!--   <groupId>org.flywaydb</groupId> -->
-      <!--   <artifactId>flyway-maven-plugin</artifactId> -->
-      <!--   <version>7.5.3</version> -->
-      <!--   <configuration> -->
-      <!--       <url>jdbc:postgresql://localhost:5432/vivid</url> -->
-      <!--       <user>postgres</user> -->
-      <!--   </configuration> -->
-      <!--   <dependencies> -->
-      <!--     <dependency> -->
-      <!--       <groupId>org.postgresql</groupId> -->
-      <!--       <artifactId>postgresql</artifactId> -->
-      <!--       <version>12.6</version> -->
-      <!--     </dependency> -->
-      <!--   </dependencies> -->
-      <!-- </plugin> -->
     </plugins>
   </build>
 
