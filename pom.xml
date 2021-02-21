@@ -38,6 +38,12 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <version>7.5.3</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -46,21 +52,22 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-maven-plugin</artifactId>
-        <version>4.0.3</version>
-        <configuration>
-          <user>postgres</user>
-          <password></password>
-          <url>http://localhost:5432</url>
-          <locations>filesystem:db/migration</locations>
-          <schemas>
-            <schema>vivid</schema>
-          </schemas>
-
-        </configuration>
-      </plugin>
+      <!-- <plugin> -->
+      <!--   <groupId>org.flywaydb</groupId> -->
+      <!--   <artifactId>flyway-maven-plugin</artifactId> -->
+      <!--   <version>7.5.3</version> -->
+      <!--   <configuration> -->
+      <!--       <url>jdbc:postgresql://localhost:5432/vivid</url> -->
+      <!--       <user>postgres</user> -->
+      <!--   </configuration> -->
+      <!--   <dependencies> -->
+      <!--     <dependency> -->
+      <!--       <groupId>org.postgresql</groupId> -->
+      <!--       <artifactId>postgresql</artifactId> -->
+      <!--       <version>12.6</version> -->
+      <!--     </dependency> -->
+      <!--   </dependencies> -->
+      <!-- </plugin> -->
     </plugins>
   </build>
 
