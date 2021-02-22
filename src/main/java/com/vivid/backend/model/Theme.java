@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "themes")
 public class Theme {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @ManyToOne
