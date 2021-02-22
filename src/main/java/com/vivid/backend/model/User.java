@@ -1,6 +1,7 @@
 package com.vivid.backend.model;
 
 import java.util.Base64;
+import java.util.Set;
 import java.security.SecureRandom;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +26,9 @@ public class User {
   private String email;
 
   private String token;
+
+  @OneToMany(mappedBy = "user")
+  private Set<Dream> dreams;
 
   protected User() {}
 
