@@ -14,9 +14,6 @@
   <description>Backend implementation for Vivid</description>
   <properties>
     <java.version>11</java.version>
-    <flyway.user>databaseUser</flyway.user>
-    <flyway.password>databasePassword</flyway.password>
-    <flyway.schemas>schemaName</flyway.schemas>
   </properties>
   <dependencies>
     <dependency>
@@ -45,21 +42,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-maven-plugin</artifactId>
-        <version>4.0.3</version>
-        <configuration>
-          <user>postgres</user>
-          <password></password>
-          <url>http://localhost:5432</url>
-          <locations>filesystem:db/migration</locations>
-          <schemas>
-            <schema>vivid</schema>
-          </schemas>
-
-        </configuration>
       </plugin>
     </plugins>
   </build>
