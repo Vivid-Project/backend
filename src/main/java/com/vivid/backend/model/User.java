@@ -30,6 +30,9 @@ public class User {
   @OneToMany(mappedBy = "user")
   private Set<Dream> dreams;
 
+  @OneToMany(mappedBy = "user")
+  private Set<Theme> themes;
+
   protected User() {}
 
   public User(String name, String email) {
