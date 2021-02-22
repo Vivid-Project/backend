@@ -14,9 +14,6 @@
   <description>Backend implementation for Vivid</description>
   <properties>
     <java.version>11</java.version>
-    <flyway.user>databaseUser</flyway.user>
-    <flyway.password>databasePassword</flyway.password>
-    <flyway.schemas>schemaName</flyway.schemas>
   </properties>
   <dependencies>
     <dependency>
@@ -37,12 +34,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-core</artifactId>
-      <version>7.5.3</version>
     </dependency>
   </dependencies>
 
