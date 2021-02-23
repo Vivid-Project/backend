@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Dream {
 
   @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @GeneratedValue(strategy=GenerationType.AUTO)
   private Long id;
 
   @ManyToOne
