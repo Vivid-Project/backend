@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.vivid.backend.exceptions.UserNotFoundException;
 import com.vivid.backend.model.User;
 import com.vivid.backend.repository.UserRepository;
 
@@ -43,7 +44,7 @@ class UserController {
 
     FilterProvider filterProvider = new SimpleFilterProvider().addFilter("userFilter", simpleBeanPropertyFilter);
 
-    Optional<User> user = userRepository.findById(id);
+    User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(user);
 
     mappingJacksonValue.setFilters(filterProvider);
