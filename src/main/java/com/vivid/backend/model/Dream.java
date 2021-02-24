@@ -12,8 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="dreams")
+@JsonFilter("dreamFilter")
 public class Dream {
 
   @Id
@@ -34,7 +38,7 @@ public class Dream {
   private String emotion;
 
   @OneToMany(mappedBy = "dream")
-  private Set<DreamTheme> dream_themes;
+  private Set<DreamTheme> dreamThemes;
 
   protected Dream() {}
 

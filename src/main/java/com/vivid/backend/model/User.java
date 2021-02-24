@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="users")
@@ -58,6 +59,14 @@ public class User {
 
   public String getToken() {
     return this.token;
+  }
+
+  public Set<Dream> getDreams() {
+    return this.dreams;
+  }
+
+  public Set<Theme> getThemes() {
+    return this.themes;
   }
 
   private static final SecureRandom secureRandom = new SecureRandom();
