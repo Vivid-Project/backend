@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.vivid.backend.exceptions.UserNotFoundException;
+import com.vivid.backend.filters.UserFilters;
 import com.vivid.backend.model.User;
 import com.vivid.backend.repository.UserRepository;
 
@@ -25,29 +26,23 @@ class UserController {
   }
 
   @GetMapping("/users")
-  MappingJacksonValue getAllUsersFiltered() {
-    SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("token");
-
-    FilterProvider filterProvider = new SimpleFilterProvider().addFilter("userFilter", simpleBeanPropertyFilter);
+  public MappingJacksonValue getAllUsersFiltered() {
 
     List<User> users = userRepository.findAll();
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(users);
 
-    mappingJacksonValue.setFilters(filterProvider);
+    mappingJacksonValue.setFilters(UserFilters.USER_DEFAULT_FILTER);
 
     return mappingJacksonValue;
   }
 
   @GetMapping("/users/{id}")
-  MappingJacksonValue getUserFiltered(@PathVariable Long id) {
-    SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("token");
-
-    FilterProvider filterProvider = new SimpleFilterProvider().addFilter("userFilter", simpleBeanPropertyFilter);
+  public MappingJacksonValue getUserFiltered(@PathVariable Long id) {
 
     User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(user);
 
-    mappingJacksonValue.setFilters(filterProvider);
+    mappingJacksonValue.setFilters(UserFilters.USER_DEFAULT_FILTER);
 
     return mappingJacksonValue;
   }
