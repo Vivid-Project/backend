@@ -1,5 +1,6 @@
 package com.vivid.backend.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -8,12 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="dreams")
@@ -37,8 +37,8 @@ public class Dream {
 
   private String emotion;
 
-  @OneToMany(mappedBy = "dream")
-  private Set<DreamTheme> dreamThemes;
+  @ManyToMany
+  private Set<Theme> themes = new HashSet<>();
 
   protected Dream() {}
 
@@ -72,5 +72,14 @@ public class Dream {
 
   public User getUser() {
     return this.user;
+  }
+
+  public Set<Theme> getThemes() {
+    return themes;
+  }
+
+  public void addTheme(Theme theme) {
+    themes.add(theme);
+    theme.getDreams().add(this);
   }
 }

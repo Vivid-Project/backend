@@ -1,11 +1,7 @@
 package com.vivid.backend.controller;
 
 import java.util.List;
-import java.util.Optional;
 
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.vivid.backend.exceptions.UserNotFoundException;
 import com.vivid.backend.filters.UserFilters;
 import com.vivid.backend.model.User;

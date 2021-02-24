@@ -5,7 +5,6 @@ import java.util.Set;
 import com.vivid.backend.exceptions.DreamNotFoundException;
 import com.vivid.backend.exceptions.UserNotFoundException;
 import com.vivid.backend.filters.DreamFilters;
-import com.vivid.backend.filters.UserFilters;
 import com.vivid.backend.model.Dream;
 import com.vivid.backend.repository.DreamRepository;
 import com.vivid.backend.repository.UserRepository;

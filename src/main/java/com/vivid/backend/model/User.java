@@ -1,8 +1,8 @@
 package com.vivid.backend.model;
 
+import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Set;
-import java.security.SecureRandom;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="users")
