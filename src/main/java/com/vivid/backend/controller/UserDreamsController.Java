@@ -1,19 +1,23 @@
 package com.vivid.backend.controller;
 
-import java.util.List;
+import java.util.Set;
 
-import com.vivid.backend.model.User;
+import com.vivid.backend.exceptions.DreamNotFoundException;
+import com.vivid.backend.exceptions.UserNotFoundException;
+import com.vivid.backend.filters.DreamFilters;
+import com.vivid.backend.filters.UserFilters;
+import com.vivid.backend.model.Dream;
+import com.vivid.backend.repository.DreamRepository;
 import com.vivid.backend.repository.UserRepository;
 
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
 
-
+@RequestMapping("users")
 @RestController
-@RequestMapping("/users/{id}")
 class UserDreamsController {
 
   private final UserRepository userRepository;
@@ -24,10 +28,28 @@ class UserDreamsController {
     this.dreamRepository = dreamRepository;
   }
 
-  User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+  @GetMapping("{userId}/dreams")
+  public MappingJacksonValue getUsersDreamsFiltered(@PathVariable Long userId) {
 
-  @GetMapping("/dreams")
-  public ResponseEntity<> getMethodName(@RequestParam String param) {
-      return new SomeData();
+    Set<Dream> dreams = dreamRepository.findAllByUserId(userId);
+    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(dreams);
+
+    mappingJacksonValue.setFilters(DreamFilters.DREAM_DEFAULT_FILTER);
+
+    return mappingJacksonValue;
+  }
+
+  @GetMapping("{userId}/dreams/{dreamId}")
+  public MappingJacksonValue getUserDreamFiltered(@PathVariable Long userId, @PathVariable Long dreamId) {
+
+    userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+
+    Dream dream = dreamRepository.findByUserIdAndId(userId, dreamId)
+        .orElseThrow(() -> new DreamNotFoundException(dreamId));
+    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(dream);
+
+    mappingJacksonValue.setFilters(DreamFilters.DREAM_INCLUDE_USER_FILTER);
+
+    return mappingJacksonValue;
   }
 }
