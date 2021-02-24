@@ -1,12 +1,5 @@
 # Tone Analyzer Microservice
 
-<!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![Build Status](https://travis-ci.com/travis-ci/travis-web.svg?branch=master)](https://travis-ci.com/github/Vivid-Project/microservice)
-
 
   <h3 align="center">Vivid Backend</h3>
 
@@ -114,3 +107,19 @@ Taylor Phillips &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [!
 
 
 Project Link: [Vivid](https://github.com/Vivid-Project)
+
+
+<!-- ACKNOWLEDGEMENTS -->
+<!-- Add resources that were used to help create this project here -->
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[contributors-shield]: https://img.shields.io/github/contributors/Vivid-Project/microservice
+[contributors-url]: https://github.com/Vivid-Project/microservice/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Vivid-Project/microservice
+[forks-url]: https://github.com/Vivid-Project/microservice/network/members
+[stars-shield]: https://img.shields.io/github/stars/Vivid-Project/microservice
+[stars-url]: https://github.com/Vivid-Project/microservice/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Vivid-Project/microservice
+[issues-url]: https://https://github.com/Vivid-Project/microservice/issues
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
