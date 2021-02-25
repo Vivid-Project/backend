@@ -1,4 +1,11 @@
-# Tone Analyzer Microservice
+# Vivid Project Backend
+
+<!-- PROJECT SHIELDS -->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![Build Status]
 
 
   <h3 align="center">Vivid Backend</h3>
