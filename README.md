@@ -71,6 +71,27 @@ These setup instructions are for Mac OS.
 
 ### Usage
 
+#### API Endpoints
+
+##### Authenticate User
+Request:
+```
+Uri: /users/authenticate
+
+{
+    "email": "adrew@example.com"
+}
+```
+Response:
+```
+{
+    "id": 345,
+    "name": "Ava Drew",
+    "email": "adrew@example.com",
+    "token": "a6t9dvJW424Mw3BRHTfE5qiZg67-kXk_"
+}
+```
+
 
 ### Testing
 

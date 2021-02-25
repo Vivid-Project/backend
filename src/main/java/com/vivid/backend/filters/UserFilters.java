@@ -6,8 +6,15 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 public class UserFilters {
   public static final FilterProvider USER_DEFAULT_FILTER = userDefaultFilter();
+  public static final FilterProvider USER_AUTHORIZATION_FILTER = userAuthorizationFilter();
 
   private UserFilters() {
+  }
+
+  private static FilterProvider userAuthorizationFilter() {
+    SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("dreams", "themes");
+
+    return new SimpleFilterProvider().addFilter("userFilter", simpleBeanPropertyFilter);
   }
 
   private static FilterProvider userDefaultFilter() {
