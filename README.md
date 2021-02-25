@@ -11,17 +11,15 @@
   <h3 align="center">Vivid Backend</h3>
 
   <p align="center">
-    This is a microservice that was built to provide a tone analysis for a user's dream journal entry.
-    <br />
-    <a href="https://github.com/Vivid-Project/microservice"><strong>Explore the docs »</strong></a>
+    This is the backend API service for the Vivid app.
     <br />
     <br />
     <!-- for adding a demo video
     <a href="Add our video link here">View Demo</a>  · -->
     ·
-    <a href="https://https://github.com/Vivid-Project/microservice/issues">Report Bug</a>
+    <a href="https://github.com/Vivid-Project/backend/issues">Report Bug</a>
     ·
-    <a href="https://https://github.com/Vivid-Project/microservice/issues">Request Feature</a>
+    <a href="https://github.com/Vivid-Project/backend/issues">Request Feature</a>
   </p>
 </p>
 
