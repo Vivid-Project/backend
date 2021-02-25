@@ -121,12 +121,12 @@ Project Link: [Vivid](https://github.com/Vivid-Project)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/Vivid-Project/microservice
-[contributors-url]: https://github.com/Vivid-Project/microservice/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Vivid-Project/microservice
-[forks-url]: https://github.com/Vivid-Project/microservice/network/members
-[stars-shield]: https://img.shields.io/github/stars/Vivid-Project/microservice
-[stars-url]: https://github.com/Vivid-Project/microservice/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Vivid-Project/microservice
-[issues-url]: https://https://github.com/Vivid-Project/microservice/issues
+[contributors-shield]: https://img.shields.io/github/contributors/Vivid-Project/backend
+[contributors-url]: https://github.com/Vivid-Project/backend/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Vivid-Project/backend
+[forks-url]: https://github.com/Vivid-Project/backend/network/members
+[stars-shield]: https://img.shields.io/github/stars/Vivid-Project/backend
+[stars-url]: https://github.com/Vivid-Project/backend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Vivid-Project/backend
+[issues-url]: https://https://github.com/Vivid-Project/backend/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
