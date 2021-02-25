@@ -76,7 +76,7 @@ These setup instructions are for Mac OS.
 ##### Authenticate User
 Request:
 ```
-Uri: /users/authenticate
+Uri: POST /users/authenticate
 
 {
     "email": "adrew@example.com"
@@ -89,6 +89,22 @@ Response:
     "name": "Ava Drew",
     "email": "adrew@example.com",
     "token": "a6t9dvJW424Mw3BRHTfE5qiZg67-kXk_"
+}
+```
+
+##### Get user data
+Request:
+```
+Uri: GET /user
+
+Header: "Authorization": "Bearer <token>"
+```
+Response:
+```
+{
+    "id": 450,
+    "name": "Ava Drew",
+    "email": "adrew@example.com"
 }
 ```
 

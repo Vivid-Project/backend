@@ -40,10 +40,10 @@ class UserController {
     return mappingJacksonValue;
   }
 
-  @GetMapping("/users/{id}")
-  public MappingJacksonValue getUserFiltered(@PathVariable Long id) {
+  @GetMapping("/user")
+  public MappingJacksonValue getUserFiltered(@RequestHeader Map<String, String> headers) {
 
-    User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+    User user = userAuthenticationHelper.authorize(headers.get("authorization"));
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(user);
 
     mappingJacksonValue.setFilters(UserFilters.USER_DEFAULT_FILTER);
@@ -52,9 +52,9 @@ class UserController {
   }
 
   @PostMapping("/users/authenticate")
-  public MappingJacksonValue authenticateUser(@RequestBody String body, @RequestHeader Map<String, String> headers) {
+  public MappingJacksonValue authenticateUser(@RequestBody String body) {
 
-    User user = userAuthenticationHelper.authenticate(body).orElseThrow(() -> new AuthenticationFailedException());
+    User user = userAuthenticationHelper.authenticate(body);
 
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(user);
 
