@@ -5,7 +5,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![Build Status]
+<!--   Add in badge :  [![Build Status] -->
 
 
   <h3 align="center">Vivid Backend</h3>
