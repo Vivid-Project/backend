@@ -16,6 +16,7 @@ import org.springframework.boot.json.BasicJsonParser;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 class UserDreamsController {
 
@@ -71,7 +73,8 @@ class UserDreamsController {
     Map<String, Object> json = basicJsonParser.parseMap(dream);
 
     User user = userAuthenticationHelper.authorize(headers.get("authorization").toString());
-    Dream newDream = new Dream(json.get("date").toString(), json.get("title").toString(), json.get("description").toString(), json.get("emotion").toString(), user);
+    Dream newDream = new Dream(json.get("date").toString(), json.get("title").toString(),
+        json.get("description").toString(), json.get("emotion").toString(), user);
 
     dreamRepository.save(newDream);
     user.addDream(newDream);
