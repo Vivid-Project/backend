@@ -68,6 +68,11 @@ public class User {
     return this.themes;
   }
 
+  public void addDream(Dream dream) {
+    dreams.add(dream);
+    dream.setUser(this);
+  }
+
   private static final SecureRandom secureRandom = new SecureRandom();
   private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
