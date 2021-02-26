@@ -22,10 +22,10 @@ class SeedDatabase {
 
   ) {
 
+    toneRepository.deleteAll();
     dreamRepository.deleteAll();
     themeRepository.deleteAll();
     userRepository.deleteAll();
-    toneRepository.deleteAll();
 
     return args -> {
       User user1 = userRepository.save(new User("Mike Jones", "mjones@example.com"));

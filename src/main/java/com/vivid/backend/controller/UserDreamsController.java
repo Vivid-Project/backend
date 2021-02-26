@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.vivid.backend.exceptions.DreamNotFoundException;
+import com.vivid.backend.facades.ToneFacade;
 import com.vivid.backend.filters.DreamFilters;
 import com.vivid.backend.helpers.UserAuthenticationHelper;
 import com.vivid.backend.model.Dream;
@@ -71,6 +72,8 @@ class UserDreamsController {
 
     dreamRepository.save(newDream);
     user.addDream(newDream);
+
+    ToneFacade.getTones(newDream);
 
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(newDream);
     mappingJacksonValue.setFilters(DreamFilters.DREAM_DEFAULT_FILTER);

@@ -10,4 +10,8 @@ public class MicroserviceRequestFailedException extends RuntimeException{
   public MicroserviceRequestFailedException() {
     super("Failed to retrieve data from microservice");
   }
+
+  public MicroserviceRequestFailedException(String reason) {
+    super("Failed to retrieve data from microservice: " + reason);
+  }
 }
