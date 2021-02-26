@@ -1,10 +1,8 @@
 package com.vivid.backend.controller;
 
-import java.util.List;
 import java.util.Map;
 
-import com.vivid.backend.exceptions.AuthenticationFailedException;
-import com.vivid.backend.exceptions.UserNotFoundException;
+import com.vivid.backend.exceptions.BadRequestException;
 import com.vivid.backend.filters.UserFilters;
 import com.vivid.backend.helpers.UserAuthenticationHelper;
 import com.vivid.backend.model.User;
@@ -12,7 +10,6 @@ import com.vivid.backend.repository.UserRepository;
 
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -26,18 +23,22 @@ class UserController {
 
   UserController(UserRepository userRepository) {
     this.userRepository = userRepository;
-    this.userAuthenticationHelper = new UserAuthenticationHelper(userRepository);
+    this.userAuthenticationHelper = new UserAuthenticationHelper(this.userRepository);
   }
 
   @GetMapping("/users")
   public MappingJacksonValue getAllUsersFiltered() {
 
-    List<User> users = userRepository.findAll();
-    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(users);
+    // List<User> users = userRepository.findAll();
+    // MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(users);
 
-    mappingJacksonValue.setFilters(UserFilters.USER_DEFAULT_FILTER);
+    // mappingJacksonValue.setFilters(UserFilters.USER_DEFAULT_FILTER);
 
-    return mappingJacksonValue;
+    // return mappingJacksonValue;
+
+    throw new BadRequestException("Ask the backend why you don't need all the users at once");
+
+    // return null;
   }
 
   @GetMapping("/user")

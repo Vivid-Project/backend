@@ -108,6 +108,57 @@ Response:
 }
 ```
 
+##### Get user dreams
+* This one isn't done yet, still need the tone analysis
+Request:
+```
+Uri: GET /dreams
+
+Header: "Authorization": "Bearer <token>"
+```
+Response:
+```
+[
+    {
+        "id": 551,
+        "date": "02/22/2021",
+        "title": "Weird Dream",
+        "description": "This was very weird",
+        "emotion": "Fun",
+        "themes": []
+    }
+    {
+        ...
+    }
+]
+```
+
+##### Get single user dream
+* This one isn't done yet, still need the tone analysis
+* If you don't want the user here, literally just tell me, its a one word change
+Request:
+```
+Uri: GET /dreams/<dreamId>
+
+Header: "Authorization": "Bearer <token>"
+```
+Response:
+```
+{
+    "id": 579,
+    "user": {
+        "id": 576,
+        "name": "Ava Drew",
+        "email": "adrew@example.com"
+    },
+    "date": "02/22/2021",
+    "title": "Weird Dream",
+    "description": "This was very weird",
+    "emotion": "Fun",
+    "themes": []
+}
+```
+
 
 ### Testing
 

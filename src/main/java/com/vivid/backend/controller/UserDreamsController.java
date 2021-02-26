@@ -1,36 +1,42 @@
 package com.vivid.backend.controller;
 
+import java.util.Map;
 import java.util.Set;
 
 import com.vivid.backend.exceptions.DreamNotFoundException;
 import com.vivid.backend.exceptions.UserNotFoundException;
 import com.vivid.backend.filters.DreamFilters;
+import com.vivid.backend.helpers.UserAuthenticationHelper;
 import com.vivid.backend.model.Dream;
+import com.vivid.backend.model.User;
 import com.vivid.backend.repository.DreamRepository;
 import com.vivid.backend.repository.UserRepository;
 
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("users")
 @RestController
 class UserDreamsController {
 
   private final UserRepository userRepository;
   private final DreamRepository dreamRepository;
+  private final UserAuthenticationHelper userAuthenticationHelper;
 
   UserDreamsController(UserRepository userRepository, DreamRepository dreamRepository) {
     this.userRepository = userRepository;
     this.dreamRepository = dreamRepository;
+    this.userAuthenticationHelper = new UserAuthenticationHelper(this.userRepository);
   }
 
-  @GetMapping("{userId}/dreams")
-  public MappingJacksonValue getUsersDreamsFiltered(@PathVariable Long userId) {
+  @GetMapping("/dreams")
+  public MappingJacksonValue getUsersDreamsFiltered(@RequestHeader Map<String, Object> headers) {
 
-    Set<Dream> dreams = dreamRepository.findAllByUserId(userId);
+    User user = userAuthenticationHelper.authorize(headers.get("authorization").toString());
+
+    Set<Dream> dreams = dreamRepository.findAllByUser(user);
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(dreams);
 
     mappingJacksonValue.setFilters(DreamFilters.DREAM_DEFAULT_FILTER);
@@ -38,13 +44,13 @@ class UserDreamsController {
     return mappingJacksonValue;
   }
 
-  @GetMapping("{userId}/dreams/{dreamId}")
-  public MappingJacksonValue getUserDreamFiltered(@PathVariable Long userId, @PathVariable Long dreamId) {
+  @GetMapping("dreams/{dreamId}")
+  public MappingJacksonValue getUserDreamFiltered(@RequestHeader Map<String, Object> headers,
+      @PathVariable Long dreamId) {
 
-    userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+    User user = userAuthenticationHelper.authorize(headers.get("authorization").toString());
 
-    Dream dream = dreamRepository.findByUserIdAndId(userId, dreamId)
-        .orElseThrow(() -> new DreamNotFoundException(dreamId));
+    Dream dream = dreamRepository.findByUserAndId(user, dreamId).orElseThrow(() -> new DreamNotFoundException(dreamId));
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(dream);
 
     mappingJacksonValue.setFilters(DreamFilters.DREAM_INCLUDE_USER_FILTER);
