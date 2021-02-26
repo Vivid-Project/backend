@@ -159,6 +159,36 @@ Response:
 }
 ```
 
+##### Create a user dream
+```
+Uri: POST /dreams
+
+Header: "Authorization": "Bearer <token>"
+
+Raw JSON Body:
+
+{
+    "date": "02/25/2021",
+    "title": "Train dream",
+    "description": "I was on a train",
+    "emotion": "Weird"
+}
+```
+
+Response:
+```
+{
+    "id": 146,
+    "date": "02/25/2021",
+    "title": "Train dream",
+    "description": "I was on a train",
+    "emotion": "Weird",
+    "themes": []
+}
+```
+
+
+
 
 ### Testing
 

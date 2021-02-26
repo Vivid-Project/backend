@@ -12,9 +12,15 @@ import com.vivid.backend.model.User;
 import com.vivid.backend.repository.DreamRepository;
 import com.vivid.backend.repository.UserRepository;
 
+import org.springframework.boot.json.BasicJsonParser;
+import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +29,7 @@ class UserDreamsController {
 
   private final UserRepository userRepository;
   private final DreamRepository dreamRepository;
+  private final BasicJsonParser basicJsonParser = new BasicJsonParser();
   private final UserAuthenticationHelper userAuthenticationHelper;
 
   UserDreamsController(UserRepository userRepository, DreamRepository dreamRepository) {
@@ -54,6 +61,23 @@ class UserDreamsController {
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(dream);
 
     mappingJacksonValue.setFilters(DreamFilters.DREAM_INCLUDE_USER_FILTER);
+
+    return mappingJacksonValue;
+  }
+
+  @PostMapping("/dreams")
+  public MappingJacksonValue createUserDream(@RequestBody String dream, @RequestHeader Map<String, Object> headers) {
+
+    Map<String, Object> json = basicJsonParser.parseMap(dream);
+
+    User user = userAuthenticationHelper.authorize(headers.get("authorization").toString());
+    Dream newDream = new Dream(json.get("date").toString(), json.get("title").toString(), json.get("description").toString(), json.get("emotion").toString(), user);
+
+    dreamRepository.save(newDream);
+    user.addDream(newDream);
+
+    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(newDream);
+    mappingJacksonValue.setFilters(DreamFilters.DREAM_DEFAULT_FILTER);
 
     return mappingJacksonValue;
   }

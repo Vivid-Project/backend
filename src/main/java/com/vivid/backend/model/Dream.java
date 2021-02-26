@@ -78,6 +78,10 @@ public class Dream {
     return themes;
   }
 
+  public void setUser(User user) {
+    this.user = user;
+  }
+
   public void addTheme(Theme theme) {
     themes.add(theme);
     theme.getDreams().add(this);
