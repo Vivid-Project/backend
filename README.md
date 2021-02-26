@@ -161,7 +161,7 @@ Response:
 
 ##### Create a user dream
 ```
-Uri: GET /dreams/<dreamId>
+Uri: POST /dreams
 
 Header: "Authorization": "Bearer <token>"
 
