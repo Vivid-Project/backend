@@ -9,7 +9,7 @@ public class ToneFacade {
   private static final BasicJsonParser basicJsonParser = new BasicJsonParser();
 
   public static void getTones(Dream dream) {
-    String data = ToneAnalyzerService.analyzeTones(dream.getDescription());
+    String data = ToneAnalyzerService.analyzeTonesHttpClient(dream.getDescription());
     System.out.println(data);
   }
 }
