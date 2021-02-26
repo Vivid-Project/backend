@@ -18,13 +18,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-=======
 import org.springframework.web.bind.annotation.RequestHeader;
->>>>>>> a0160d477423c9276c9dc41790931551dd2a2e1b
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -32,20 +29,13 @@ class UserDreamsController {
 
   private final UserRepository userRepository;
   private final DreamRepository dreamRepository;
-<<<<<<< HEAD
-  private final BasicJsonParser basicJsonParser;
-=======
+  private final BasicJsonParser basicJsonParser = new BasicJsonParser();
   private final UserAuthenticationHelper userAuthenticationHelper;
->>>>>>> a0160d477423c9276c9dc41790931551dd2a2e1b
 
-  UserDreamsController(UserRepository userRepository, DreamRepository dreamRepository, BasicJsonParser basicJsonParser) {
+  UserDreamsController(UserRepository userRepository, DreamRepository dreamRepository) {
     this.userRepository = userRepository;
     this.dreamRepository = dreamRepository;
-<<<<<<< HEAD
-    this.basicJsonParser = basicJsonParser;
-=======
     this.userAuthenticationHelper = new UserAuthenticationHelper(this.userRepository);
->>>>>>> a0160d477423c9276c9dc41790931551dd2a2e1b
   }
 
   @GetMapping("/dreams")
@@ -76,13 +66,12 @@ class UserDreamsController {
   }
 
   @PostMapping("/dreams")
-  public MappingJacksonValue createUserDream(@RequestBody String dream) {
+  public MappingJacksonValue createUserDream(@RequestBody String dream, @RequestHeader Map<String, Object> headers) {
 
     Map<String, Object> json = basicJsonParser.parseMap(dream);
-    // User user = userRepository.findById(json.token).orElseThrow(() -> new UserNotFoundException(userId));
 
-    User user = null;
-    Dream newDream = new Dream(date, title, description, emotion, user);
+    User user = userAuthenticationHelper.authorize(headers.get("authorization").toString());
+    Dream newDream = new Dream(json.get("date").toString(), json.get("title").toString(), json.get("description").toString(), json.get("emotion").toString(), user);
 
     dreamRepository.save(newDream);
     user.addDream(newDream);
