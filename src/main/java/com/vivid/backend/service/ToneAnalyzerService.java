@@ -50,7 +50,7 @@ public class ToneAnalyzerService {
 
   public static String analyzeTonesHttpClient(String description) {
     HttpClient client = HttpClient.newHttpClient();
-
+    System.out.println(description);
     HttpRequest request = HttpRequest.newBuilder(URI.create("https://tone-analyzer-microservice.herokuapp.com/tones/"))
         .header("accept", "application/json").POST(HttpRequest.BodyPublishers.ofString(description)).build();
 
