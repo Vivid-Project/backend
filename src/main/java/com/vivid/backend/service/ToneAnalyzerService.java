@@ -50,19 +50,20 @@ public class ToneAnalyzerService {
 
   public static String analyzeTonesHttpClient(String description) {
     HttpClient client = HttpClient.newHttpClient();
-    System.out.println(description);
     HttpRequest request = HttpRequest.newBuilder(URI.create("https://tone-analyzer-microservice.herokuapp.com/microservice/api/v1.0/tones"))
-        .header("accept", "application/json").POST(HttpRequest.BodyPublishers.ofString(description)).build();
+        // HttpRequest request =
+        // HttpRequest.newBuilder(URI.create("http://localhost:/microservice/api/v1.0/tones"))
+        .header("accept", "application/json").POST(HttpRequest.BodyPublishers.ofString(description + " .")).build();
 
     HttpResponse response;
     try {
       response = client.send(request, BodyHandlers.ofString());
-      System.out.println(response);
+
+      return (String) response.body();
     } catch (Exception e) {
       // TODO Auto-generated catch block
       throw new MicroserviceRequestFailedException(e.toString());
     }
-    return null;
   }
 
 }

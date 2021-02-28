@@ -8,10 +8,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 @Entity
 @Table(name="tones")
+// @JsonFilter("toneFilter")
 public class Tone {
-  
+
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
   private Long id;
@@ -22,14 +25,15 @@ public class Tone {
 
   private String title;
 
-  private int magnitude;
+  private long magnitude;
 
   protected Tone() {}
-  
-  public Tone(String title, int magnitude, Dream dream) {
+
+  public Tone(String title, Long long1, Dream dream) {
     this.title =  title;
-    this.magnitude = magnitude;
+    this.magnitude = long1;
     this.dream = dream;
+    this.dream.getTones().add(this);
   }
 
   public Long getId() {
@@ -40,7 +44,7 @@ public class Tone {
     return this.title;
   }
 
-  public int getMagnitude() {
+  public long getMagnitude() {
     return this.magnitude;
   }
 

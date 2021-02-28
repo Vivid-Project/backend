@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.vivid.backend.serializers.ToneSerializer;
+
+import org.springframework.http.converter.json.MappingJacksonValue;
 
 @Entity
 @Table(name="dreams")
@@ -39,7 +42,7 @@ public class Dream {
   private String emotion;
 
   @OneToMany(mappedBy="dream")
-  private Set<Tone> tones;
+  private Set<Tone> tones = new HashSet<>();
 
   @ManyToMany
   private Set<Theme> themes = new HashSet<>();
@@ -78,8 +81,16 @@ public class Dream {
     return this.user;
   }
 
+  public MappingJacksonValue getToneAnalysis() {
+    return ToneSerializer.serializeToneList(tones);
+  }
+
   public Set<Theme> getThemes() {
     return themes;
+  }
+
+  public Set<Tone> getTones() {
+    return tones;
   }
 
   public void setUser(User user) {
