@@ -133,6 +133,41 @@ Response:
 ]
 ```
 
+##### Get user dreams by date range
+* This one isn't done yet, still need the tone analysis
+Request:
+```
+Uri: GET /dreams
+
+Header: "Authorization": "Bearer <token>"
+
+Params(required): dateStart, dateEnd
+```
+Response:
+```
+[
+    {
+        "id": 3,
+        "date": "2021-02-23",
+        "title": "Cool Dream",
+        "description": "This is a good dream",
+        "emotion": "Happy",
+        "themes": []
+    },
+    {
+        "id": 4,
+        "date": "2021-02-24",
+        "title": "Bad Dream",
+        "description": "This was scary",
+        "emotion": "Bad",
+        "themes": []
+    },
+    {
+        ...
+    }
+]
+```
+
 ##### Get single user dream
 * This one isn't done yet, still need the tone analysis
 * If you don't want the user here, literally just tell me, its a one word change

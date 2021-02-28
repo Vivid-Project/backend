@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
@@ -38,12 +39,25 @@ class UserDreamsController {
     this.userAuthenticationHelper = new UserAuthenticationHelper(this.userRepository);
   }
 
-  @GetMapping("/dreams")
+  @GetMapping(value = "/dreams")
   public MappingJacksonValue getUsersDreamsFiltered(@RequestHeader Map<String, Object> headers) {
 
     User user = userAuthenticationHelper.authorize(headers.get(AUTH_HEADER).toString());
 
     Set<Dream> dreams = dreamRepository.findAllByUser(user);
+    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(dreams);
+
+    mappingJacksonValue.setFilters(DreamFilters.DREAM_DEFAULT_FILTER);
+
+    return mappingJacksonValue;
+  }
+
+  @GetMapping(value = "/dreams", params = {"dateStart", "dateEnd"})
+  public MappingJacksonValue getUsersDreamsByDateRange(@RequestHeader Map<String, Object> headers, @RequestParam(name = "dateStart") String dateStart, @RequestParam(name = "dateEnd") String dateEnd) {
+
+    User user = userAuthenticationHelper.authorize(headers.get(AUTH_HEADER).toString());
+
+    Set<Dream> dreams = dreamRepository.findByUserAndDateBetween(user, dateStart, dateEnd);
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(dreams);
 
     mappingJacksonValue.setFilters(DreamFilters.DREAM_DEFAULT_FILTER);
