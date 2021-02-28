@@ -1,6 +1,8 @@
 package com.vivid.backend.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,9 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.vivid.backend.serializers.ToneSerializer;
 
 @Entity
 @Table(name="dreams")
@@ -36,6 +41,9 @@ public class Dream {
   private String description;
 
   private String emotion;
+
+  @OneToMany(mappedBy="dream")
+  private Set<Tone> tones = new HashSet<>();
 
   @ManyToMany
   private Set<Theme> themes = new HashSet<>();
@@ -74,8 +82,18 @@ public class Dream {
     return this.user;
   }
 
+  @JsonSerialize(using = ToneSerializer.class)
+  public Set<Tone> getToneAnalysis() {
+    return tones;
+  }
+
   public Set<Theme> getThemes() {
     return themes;
+  }
+
+  @JsonSerialize(using = ToneSerializer.class)
+  public List<Tone> getTones() {
+    return new ArrayList(tones);
   }
 
   public void setUser(User user) {
@@ -85,5 +103,9 @@ public class Dream {
   public void addTheme(Theme theme) {
     themes.add(theme);
     theme.getDreams().add(this);
+  }
+
+  public void addTone(Tone tone) {
+    tones.add(tone);
   }
 }

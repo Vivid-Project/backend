@@ -2,9 +2,11 @@ package com.vivid.backend;
 
 import com.vivid.backend.model.Dream;
 import com.vivid.backend.model.Theme;
+import com.vivid.backend.model.Tone;
 import com.vivid.backend.model.User;
 import com.vivid.backend.repository.DreamRepository;
 import com.vivid.backend.repository.ThemeRepository;
+import com.vivid.backend.repository.ToneRepository;
 import com.vivid.backend.repository.UserRepository;
 
 import org.springframework.boot.CommandLineRunner;
@@ -16,7 +18,7 @@ class SeedDatabase {
 
   @Bean
   CommandLineRunner initDatabase(UserRepository userRepository, DreamRepository dreamRepository,
-      ThemeRepository themeRepository
+      ThemeRepository themeRepository, ToneRepository toneRepository
 
   ) {
 
@@ -36,6 +38,8 @@ class SeedDatabase {
 
         Theme theme1 = themeRepository.save(new Theme(user1, "Bus"));
         Theme theme2 = themeRepository.save(new Theme(user2, "Train"));
+
+        Tone tone1 = toneRepository.save(new Tone("Fun", 2L, dream1));
 
         dream1.addTheme(theme1);
         dream2.addTheme(theme1);

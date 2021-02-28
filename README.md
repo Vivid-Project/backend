@@ -109,7 +109,6 @@ Response:
 ```
 
 ##### Get user dreams
-* This one isn't done yet, still need the tone analysis
 Request:
 ```
 Uri: GET /dreams
@@ -125,7 +124,13 @@ Response:
         "title": "Weird Dream",
         "description": "This was very weird",
         "emotion": "Fun",
-        "themes": []
+        "themes": [],
+        "toneAnalysis": {
+          "tone_strength": {
+                "Tentative": 1
+            },
+            "unique_tones": "Tentative"
+        }
     }
     {
         ...
@@ -169,8 +174,6 @@ Response:
 ```
 
 ##### Get single user dream
-* This one isn't done yet, still need the tone analysis
-* If you don't want the user here, literally just tell me, its a one word change
 Request:
 ```
 Uri: GET /dreams/<dreamId>
@@ -190,7 +193,13 @@ Response:
     "title": "Weird Dream",
     "description": "This was very weird",
     "emotion": "Fun",
-    "themes": []
+    "themes": [],
+    "toneAnalysis": {
+        "tone_strength": {
+            "Tentative": 1
+        },
+        "unique_tones": "Tentative"
+    }
 }
 ```
 
@@ -218,7 +227,13 @@ Response:
     "title": "Train dream",
     "description": "I was on a train",
     "emotion": "Weird",
-    "themes": []
+    "themes": [],
+    "toneAnalysis": {
+        "tone_strength": {
+            "Tentative": 1
+        },
+        "unique_tones": "Tentative"
+    }
 }
 ```
 

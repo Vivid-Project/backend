@@ -5,11 +5,13 @@ import java.util.Set;
 
 import com.vivid.backend.exceptions.AuthenticationFailedException;
 import com.vivid.backend.exceptions.DreamNotFoundException;
+import com.vivid.backend.facades.ToneFacade;
 import com.vivid.backend.filters.DreamFilters;
 import com.vivid.backend.helpers.UserAuthenticationHelper;
 import com.vivid.backend.model.Dream;
 import com.vivid.backend.model.User;
 import com.vivid.backend.repository.DreamRepository;
+import com.vivid.backend.repository.ToneRepository;
 import com.vivid.backend.repository.UserRepository;
 
 import org.springframework.boot.json.BasicJsonParser;
@@ -29,13 +31,15 @@ class UserDreamsController {
 
   private final UserRepository userRepository;
   private final DreamRepository dreamRepository;
+  private final ToneRepository toneRepository;
   private final BasicJsonParser basicJsonParser = new BasicJsonParser();
   private final UserAuthenticationHelper userAuthenticationHelper;
   private static final String AUTH_HEADER = "authorization";
 
-  UserDreamsController(UserRepository userRepository, DreamRepository dreamRepository) {
+  UserDreamsController(UserRepository userRepository, DreamRepository dreamRepository, ToneRepository toneRepository) {
     this.userRepository = userRepository;
     this.dreamRepository = dreamRepository;
+    this.toneRepository = toneRepository;
     this.userAuthenticationHelper = new UserAuthenticationHelper(this.userRepository);
   }
 
@@ -96,6 +100,8 @@ class UserDreamsController {
 
     dreamRepository.save(newDream);
     user.addDream(newDream);
+
+    ToneFacade.getTones(newDream, toneRepository);
 
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(newDream);
     mappingJacksonValue.setFilters(DreamFilters.DREAM_DEFAULT_FILTER);
