@@ -6,44 +6,52 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import com.fasterxml.jackson.databind.type.CollectionType;
 import com.vivid.backend.model.Tone;
 
-import org.springframework.http.converter.json.MappingJacksonValue;
-
 public class ToneSerializer extends StdSerializer<Set<Tone>> {
+
+  protected ToneSerializer() {
+    super(new ObjectMapper().getTypeFactory().constructCollectionType(List.class, Tone.class));
+  }
 
   protected ToneSerializer(Class<Set<Tone>> t) {
     super(t);
     // TODO Auto-generated constructor stub
   }
 
-  /**
+  public ToneSerializer(CollectionType toneListType) {
+    super(toneListType);
+  }
+
+/**
    *
    */
   private static final long serialVersionUID = 1L;
 
-  public static MappingJacksonValue serializeToneList(Set<Tone> tones) {
-    String output = "{\n" + "\"tone_strength\": {\n";
+  // public static MappingJacksonValue serializeToneList(Set<Tone> tones) {
+  // String output = "{\n" + "\"tone_strength\": {\n";
 
-    for (Tone tone : tones) {
-      output += "\"" + tone.getTone() + "\": " + tone.getMagnitude() + ",\n";
-    }
+  // for (Tone tone : tones) {
+  // output += "\"" + tone.getTone() + "\": " + tone.getMagnitude() + ",\n";
+  // }
 
-    output += "},\n" + "\"unique_tones\": \"";
+  // output += "},\n" + "\"unique_tones\": \"";
 
-    for (Tone tone : tones) {
-      output += tone.getTone();
-    }
+  // for (Tone tone : tones) {
+  // output += tone.getTone();
+  // }
 
-    output += "\"\n}";
+  // output += "\"\n}";
 
-    return new MappingJacksonValue(output);
+  // return new MappingJacksonValue(output);
 
-  }
+  // }
 
+  @Override
   public void serialize(Set<Tone> tones, JsonGenerator jgen, SerializerProvider provider) throws IOException {
 
     jgen.writeStartObject();

@@ -15,15 +15,20 @@ public class DreamFilters {
     SimpleBeanPropertyFilter simpleBeanPropertyFilterDream = SimpleBeanPropertyFilter.serializeAllExcept("tones");
     SimpleBeanPropertyFilter simpleBeanPropertyFilterUser = SimpleBeanPropertyFilter.serializeAllExcept("token",
         "dreams", "themes");
+    SimpleBeanPropertyFilter simpleBeanPropertyFilterTone = SimpleBeanPropertyFilter.serializeAllExcept("dream");
 
     return new SimpleFilterProvider().addFilter("dreamFilter", simpleBeanPropertyFilterDream).addFilter("userFilter",
-        simpleBeanPropertyFilterUser);
+        simpleBeanPropertyFilterUser).addFilter("toneFilter", simpleBeanPropertyFilterTone);
   }
 
   private static FilterProvider dreamDefaultFilter() {
     SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("user", "tones");
+    SimpleBeanPropertyFilter simpleBeanPropertyFilterTone = SimpleBeanPropertyFilter.serializeAllExcept("dream");
 
-    return new SimpleFilterProvider().addFilter("dreamFilter", simpleBeanPropertyFilter);
+    return new SimpleFilterProvider().addFilter("dreamFilter",
+        simpleBeanPropertyFilter)/*
+                                  * .addFilter("toneFilter", simpleBeanPropertyFilterTone)
+                                  */;
 
   }
 }

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 
 @Entity
 @Table(name="tones")
-// @JsonFilter("toneFilter")
+@JsonFilter("toneFilter")
 public class Tone {
 
   @Id
@@ -33,7 +33,7 @@ public class Tone {
     this.title =  title;
     this.magnitude = long1;
     this.dream = dream;
-    this.dream.getTones().add(this);
+    this.dream.addTone(this);
   }
 
   public Long getId() {

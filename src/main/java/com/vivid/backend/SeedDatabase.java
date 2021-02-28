@@ -40,6 +40,8 @@ class SeedDatabase {
         Theme theme1 = themeRepository.save(new Theme(user1, "Bus"));
         Theme theme2 = themeRepository.save(new Theme(user2, "Train"));
 
+        Tone tone1 = toneRepository.save(new Tone("Fun", 2L, dream1));
+
         dream1.addTheme(theme1);
         dream2.addTheme(theme1);
         dream3.addTheme(theme2);
