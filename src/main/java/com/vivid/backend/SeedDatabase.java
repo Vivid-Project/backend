@@ -31,11 +31,10 @@ class SeedDatabase {
         User user1 = userRepository.save(new User("Mike Jones", "mjones@example.com"));
         User user2 = userRepository.save(new User("Ava Drew", "adrew@example.com"));
 
-        Dream dream1 = dreamRepository
-            .save(new Dream("02/22/2021", "Cool Dream", "This is a good dream", "Happy", user1));
-        Dream dream2 = dreamRepository.save(new Dream("02/23/2021", "Bad Dream", "This was scary", "Bad", user1));
-        Dream dream3 = dreamRepository
-            .save(new Dream("02/22/2021", "Weird Dream", "This was very weird", "Fun", user2));
+        Dream dream1 = dreamRepository.save(new Dream("2021/02/23", "Cool Dream", "This is a good dream", "Happy", user1));
+        Dream dream2 = dreamRepository.save(new Dream("2021/02/24", "Bad Dream", "This was scary", "Bad", user1));
+        Dream dream3 = dreamRepository.save(new Dream("2021/02/25", "Ok Dream", "This dream was meh", "Meh", user1));
+        Dream dream4 = dreamRepository.save(new Dream("2021/02/23", "Weird Dream", "This was very weird", "Fun", user2));
 
         Theme theme1 = themeRepository.save(new Theme(user1, "Bus"));
         Theme theme2 = themeRepository.save(new Theme(user2, "Train"));
@@ -45,6 +44,7 @@ class SeedDatabase {
         dream1.addTheme(theme1);
         dream2.addTheme(theme1);
         dream3.addTheme(theme2);
+        dream4.addTheme(theme2);
       };
 
     } else {
