@@ -80,6 +80,8 @@ class UserController {
 
     User user = new User((String) json.get("name"), (String) json.get("email"), (String) json.get("password"));
 
+    userRepository.save(user);
+
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(user);
 
     mappingJacksonValue.setFilters(UserFilters.USER_AUTHORIZATION_FILTER);
