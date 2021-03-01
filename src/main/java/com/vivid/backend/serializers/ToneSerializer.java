@@ -32,25 +32,6 @@ public class ToneSerializer extends StdSerializer<Set<Tone>> {
    */
   private static final long serialVersionUID = 1L;
 
-  // public static MappingJacksonValue serializeToneList(Set<Tone> tones) {
-  // String output = "{\n" + "\"tone_strength\": {\n";
-
-  // for (Tone tone : tones) {
-  // output += "\"" + tone.getTone() + "\": " + tone.getMagnitude() + ",\n";
-  // }
-
-  // output += "},\n" + "\"unique_tones\": \"";
-
-  // for (Tone tone : tones) {
-  // output += tone.getTone();
-  // }
-
-  // output += "\"\n}";
-
-  // return new MappingJacksonValue(output);
-
-  // }
-
   @Override
   public void serialize(Set<Tone> tones, JsonGenerator jgen, SerializerProvider provider) throws IOException {
 
