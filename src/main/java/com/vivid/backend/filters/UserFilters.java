@@ -12,14 +12,15 @@ public class UserFilters {
   }
 
   private static FilterProvider userAuthorizationFilter() {
-    SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("dreams", "themes");
+    SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("dreams", "themes",
+        "passwordDigest");
 
     return new SimpleFilterProvider().addFilter("userFilter", simpleBeanPropertyFilter);
   }
 
   private static FilterProvider userDefaultFilter() {
     SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("token", "dreams",
-        "themes");
+        "themes", "passwordDigest");
 
     return new SimpleFilterProvider().addFilter("userFilter", simpleBeanPropertyFilter);
   }

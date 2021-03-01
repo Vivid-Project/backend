@@ -28,8 +28,8 @@ class SeedDatabase {
       userRepository.deleteAll();
 
       return args -> {
-        User user1 = userRepository.save(new User("Mike Jones", "mjones@example.com"));
-        User user2 = userRepository.save(new User("Ava Drew", "adrew@example.com"));
+        User user1 = userRepository.save(new User("Mike Jones", "mjones@example.com", "password"));
+        User user2 = userRepository.save(new User("Ava Drew", "adrew@example.com", "password"));
 
         Dream dream1 = dreamRepository.save(new Dream("2021/02/23", "Cool Dream", "This is a good dream", "Happy", user1));
         Dream dream2 = dreamRepository.save(new Dream("2021/02/24", "Bad Dream", "This was scary", "Bad", user1));

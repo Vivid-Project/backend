@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 @Table(name="users")
 @JsonFilter("userFilter")
@@ -28,6 +30,8 @@ public class User {
   @Column(unique=true)
   private String email;
 
+  private String passwordDigest;
+
   private String token;
 
   @OneToMany(mappedBy = "user")
@@ -38,9 +42,10 @@ public class User {
 
   protected User() {}
 
-  public User(String name, String email) {
+  public User(String name, String email, String password) {
     this.name = name;
     this.email = email;
+    this.passwordDigest = encodePassword(password);
     this.token = generateNewToken();
   }
 
@@ -54,6 +59,10 @@ public class User {
 
   public String getEmail() {
     return this.email;
+  }
+
+  public String getPasswordDigest() {
+    return this.passwordDigest;
   }
 
   public String getToken() {
@@ -80,5 +89,11 @@ public class User {
       byte[] randomBytes = new byte[24];
       secureRandom.nextBytes(randomBytes);
       return base64Encoder.encodeToString(randomBytes);
+  }
+
+  private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+  private static String encodePassword(String password) {
+    return passwordEncoder.encode(password);
   }
 }
