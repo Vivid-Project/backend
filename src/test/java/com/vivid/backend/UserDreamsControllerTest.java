@@ -14,11 +14,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.*;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+
+@SpringBootTest
+@AutoConfigureMockMvc
 public class UserDreamsControllerTest {
-  
- // Is before each block even necessary? 
+
+  // Is before each block even necessary?
   @BeforeEach
-  public void setUp() throws Exception{
+  public void setUp() throws Exception {
     User user1 = new User("Mike Jones", "mjones@example.com");
     User user2 = new User("Ava Drew", "adrew@example.com");
 
@@ -34,21 +43,21 @@ public class UserDreamsControllerTest {
     dream3.addTheme(theme2);
   }
 
-  @SpringBootTest
-  @AutoConfigureMockMvc
-  public class TestingUserDreamsControllerTests {
+  // @SpringBootTest
+  // @AutoConfigureMockMvc
+  // public class TestingUserDreamsControllerTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-    @Test
-    @DisplayName("It can return a user's dreams")
-    public void testReturnUserDreams() throws Exception {
+  @Test
+  @DisplayName("It can return a user's dreams")
+  public void testReturnUserDreams() throws Exception {
 
-      this.mockMvc.perform(get("/dreams")).andDo(print()).andExpect(status().isOk())
+    this.mockMvc.perform(get("/dreams")).andExpect(status().isBadRequest());
 
-			.andExpect(content().array(containsArray(// conatin array of dreams?)));
+    // .andExpect(content().array(containsString(substring);
 
-    }
   }
+  // }
 }
