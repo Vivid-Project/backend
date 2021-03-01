@@ -79,7 +79,8 @@ Request:
 Uri: POST /users/authenticate
 
 {
-    "email": "adrew@example.com"
+    "email": "adrew@example.com",
+    "password": "password"
 }
 ```
 Response:
@@ -139,7 +140,7 @@ Response:
 ```
 
 ##### Get user dreams by date range
-* This one isn't done yet, still need the tone analysis
+
 Request:
 ```
 Uri: GET /dreams
@@ -157,7 +158,13 @@ Response:
         "title": "Cool Dream",
         "description": "This is a good dream",
         "emotion": "Happy",
-        "themes": []
+        "themes": [],
+        "toneAnalysis": {
+          "tone_strength": {
+                "Tentative": 1
+            },
+            "unique_tones": "Tentative"
+        }
     },
     {
         "id": 4,
@@ -165,7 +172,13 @@ Response:
         "title": "Bad Dream",
         "description": "This was scary",
         "emotion": "Bad",
-        "themes": []
+        "themes": [],
+        "toneAnalysis": {
+          "tone_strength": {
+                "Joy": 1
+            },
+            "unique_tones": "Joy"
+        }
     },
     {
         ...
@@ -204,6 +217,7 @@ Response:
 ```
 
 ##### Create a user dream
+Request:
 ```
 Uri: POST /dreams
 
@@ -236,6 +250,30 @@ Response:
     }
 }
 ```
+
+##### Create user
+Request:
+```
+URI: POST /users
+
+Raw JSON Body:
+
+{
+    "name": "Alex",
+    "email": "alex@example.com",
+    "password": "password123"
+}
+```
+Response:
+```
+{
+    "id": 14,
+    "name": "Alex",
+    "email": "alex@example.com",
+    "token": "K157xIzmC9WBc7O4Rd6Ge2PV_jiwyfvN"
+}
+```
+
 
 
 

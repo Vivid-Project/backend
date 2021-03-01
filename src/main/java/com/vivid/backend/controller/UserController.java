@@ -3,11 +3,13 @@ package com.vivid.backend.controller;
 import java.util.Map;
 
 import com.vivid.backend.exceptions.BadRequestException;
+import com.vivid.backend.exceptions.UserAlreadyExistsException;
 import com.vivid.backend.filters.UserFilters;
 import com.vivid.backend.helpers.UserAuthenticationHelper;
 import com.vivid.backend.model.User;
 import com.vivid.backend.repository.UserRepository;
 
+import org.springframework.boot.json.BasicJsonParser;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ class UserController {
 
   private final UserRepository userRepository;
   private final UserAuthenticationHelper userAuthenticationHelper;
+  private final BasicJsonParser basicJsonParser = new BasicJsonParser();
 
   UserController(UserRepository userRepository) {
     this.userRepository = userRepository;
@@ -58,6 +61,26 @@ class UserController {
   public MappingJacksonValue authenticateUser(@RequestBody String body) {
 
     User user = userAuthenticationHelper.authenticate(body);
+
+    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(user);
+
+    mappingJacksonValue.setFilters(UserFilters.USER_AUTHORIZATION_FILTER);
+
+    return mappingJacksonValue;
+  }
+
+  @PostMapping("/users")
+  public MappingJacksonValue createUser(@RequestBody String body) {
+
+    Map<String, Object> json = basicJsonParser.parseMap(body);
+
+    if (userRepository.findByEmail((String) json.get("email")).isPresent()) {
+      throw new UserAlreadyExistsException();
+    }
+
+    User user = new User((String) json.get("name"), (String) json.get("email"), (String) json.get("password"));
+
+    userRepository.save(user);
 
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(user);
 

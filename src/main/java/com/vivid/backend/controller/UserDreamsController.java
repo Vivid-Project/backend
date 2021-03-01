@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.vivid.backend.exceptions.AuthenticationFailedException;
+import com.vivid.backend.exceptions.BadRequestException;
 import com.vivid.backend.exceptions.DreamNotFoundException;
 import com.vivid.backend.facades.ToneFacade;
 import com.vivid.backend.filters.DreamFilters;
@@ -45,6 +46,10 @@ class UserDreamsController {
 
   @GetMapping(value = "/dreams")
   public MappingJacksonValue getUsersDreamsFiltered(@RequestHeader Map<String, Object> headers) {
+
+    if (!headers.containsKey(AUTH_HEADER)) {
+      throw new BadRequestException("Authorization header structure incorrect");
+    }
 
     User user = userAuthenticationHelper.authorize(headers.get(AUTH_HEADER).toString());
 
