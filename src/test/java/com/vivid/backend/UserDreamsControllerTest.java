@@ -28,8 +28,8 @@ public class UserDreamsControllerTest {
   // Is before each block even necessary?
   @BeforeEach
   public void setUp() throws Exception {
-    User user1 = new User("Mike Jones", "mjones@example.com");
-    User user2 = new User("Ava Drew", "adrew@example.com");
+    User user1 = new User("Mike Jones", "mjones@example.com", "password");
+    User user2 = new User("Ava Drew", "adrew@example.com", "password");
 
     Dream dream1 = new Dream("02/22/2021", "Cool Dream", "This is a good dream", "Happy", user1);
     Dream dream2 = new Dream("02/23/2021", "Bad Dream", "This was scary", "Bad", user1);
