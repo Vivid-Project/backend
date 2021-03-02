@@ -1,5 +1,6 @@
 package com.vivid.backend;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,32 +22,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class UserDreamsControllerTest {
 
-  // // Is before each block even necessary?
-  // @BeforeEach
-  // public void setUp() throws Exception {
   @Autowired
   UserRepository userRepository;
-  // User user4 = userRepository.save(new User("Sarah Wiess", "sarah@example.com", "password", "1234"));
-  // Optional<User> optionalUser = userRepository.findByEmail("mjones@example.com");
-  // User user0 = optionalUser.get();
-  // User user1 = new User("Mike Jones", "mjones@example.com", "password", "VzYqxYC3tM0KzfSD1moEXMJHGtnegkhP");
-  User user2 = new User("Ava Drew", "adrew@example.com", "password");
-
-  // Dream dream1 = new Dream("02/22/2021", "Cool Dream", "This is a good dream", "Happy", user1);
-  // Dream dream2 = new Dream("02/23/2021", "Bad Dream", "This was scary", "Bad", user1);
-  Dream dream3 = new Dream("02/22/2021", "Weird Dream", "This was very weird", "Fun", user2);
-
-  // Theme theme1 = new Theme(user1, "Bus");
-  // Theme theme2 = new Theme(user2, "Train");
-
-  // dream1.addTheme(theme1);
-  // dream2.addTheme(theme1);
-  // dream3.addTheme(theme2);
-  // }
-
-  // @SpringBootTest
-  // @AutoConfigureMockMvc
-  // public class TestingUserDreamsControllerTests {
 
   @Autowired
   private MockMvc mockMvc;
@@ -56,9 +33,6 @@ public class UserDreamsControllerTest {
   public void testUserDreamsFailWithoutToken() throws Exception {
 
     this.mockMvc.perform(get("/dreams")).andExpect(status().isBadRequest());
-
-    // .andExpect(content().array(containsString(substring);
-
   }
 
   @Test
@@ -71,16 +45,31 @@ public class UserDreamsControllerTest {
     Dream dream1 = new Dream("02/22/2021", "Test dream", "Testing", "Happy", testUser);
 
     testUser.addDream(dream1);
-    // Dream dream2 = new Dream("02/23/2021", "Bad Dream", "This was scary", "Bad", testUser);
 
     HttpHeaders headers = new HttpHeaders();
     headers.add("authorization", "Bearer " + testUser.getToken());
-
-    this.mockMvc.perform(get("/dreams").headers(headers)).andExpect(status().isOk())
     
-    // ADD MORE ASSERTIONS FOR DREAM COUNTS
-    ;
+    String json = "[{'id': 3,'date': '2021/02/23','title': 'Cool Dream','description': 'This is a good dream','emotion': 'Happy','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': ''}},{'id': 4,'date': '2021/02/24','title': 'Bad Dream','description': 'This was scary','emotion': 'Bad','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': ''}},{'id': 5,'date': '2021/02/25','title': 'Ok Dream','description': 'This dream was meh','emotion': 'Meh','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': ''}}]";
 
+    this.mockMvc.perform(get("/dreams").headers(headers))
+                .andExpect(status().isOk())
+                .andExpect(content().json(json));
   }
-  // }
+  
+  @Test
+  @DisplayName("Getting a user's single dream succeeds")
+  public void testItCanReturnAsingleUserDream() throws Exception {
+
+    Optional<User> optionalUser = userRepository.findByEmail("mjones@example.com");
+    User testUser = optionalUser.get();
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("authorization", "Bearer " + testUser.getToken());
+    
+    String json = "{'id': 3,'user': {'id': 1,'name': 'Mike Jones','email': 'mjones@example.com','passwordDigest': null},'date': '2021/02/23','title': 'Cool Dream','description': 'This is a good dream','emotion': 'Happy','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': ''}}";
+
+    this.mockMvc.perform(get("/dreams/3").headers(headers))
+                .andExpect(status().isOk())
+                .andExpect(content().json(json));
+  }
 }
