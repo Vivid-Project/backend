@@ -48,14 +48,14 @@ public class UserDreamsControllerTest {
 
     HttpHeaders headers = new HttpHeaders();
     headers.add("authorization", "Bearer " + testUser.getToken());
-    
-    String json = "[{'id': 3,'date': '2021/02/23','title': 'Cool Dream','description': 'This is a good dream','emotion': 'Happy','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': ''}},{'id': 4,'date': '2021/02/24','title': 'Bad Dream','description': 'This was scary','emotion': 'Bad','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': ''}},{'id': 5,'date': '2021/02/25','title': 'Ok Dream','description': 'This dream was meh','emotion': 'Meh','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': ''}}]";
+
+    String json = "[{'id': 3,'date': '2021/02/23','title': 'Cool Dream','description': 'This is a good dream','emotion': 'Happy','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': 'Fun'}},{'id': 4,'date': '2021/02/24','title': 'Bad Dream','description': 'This was scary','emotion': 'Bad','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': ''}},{'id': 5,'date': '2021/02/25','title': 'Ok Dream','description': 'This dream was meh','emotion': 'Meh','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': ''}}]";
 
     this.mockMvc.perform(get("/dreams").headers(headers))
                 .andExpect(status().isOk())
                 .andExpect(content().json(json));
   }
-  
+
   @Test
   @DisplayName("Getting a user's single dream succeeds")
   public void testItCanReturnAsingleUserDream() throws Exception {
@@ -65,11 +65,13 @@ public class UserDreamsControllerTest {
 
     HttpHeaders headers = new HttpHeaders();
     headers.add("authorization", "Bearer " + testUser.getToken());
-    
-    String json = "{'id': 3,'user': {'id': 1,'name': 'Mike Jones','email': 'mjones@example.com','passwordDigest': null},'date': '2021/02/23','title': 'Cool Dream','description': 'This is a good dream','emotion': 'Happy','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': ''}}";
+    String json = "{'id': 3,'user': {'id': 1,'name': 'Mike Jones','email': 'mjones@example.com'},'date': '2021/02/23','title': 'Cool Dream','description': 'This is a good dream','emotion': 'Happy','themes': [],'toneAnalysis': {'tone_strength': {},'unique_tones': 'Fun'}}";
 
     this.mockMvc.perform(get("/dreams/3").headers(headers))
                 .andExpect(status().isOk())
                 .andExpect(content().json(json));
+
+    System.out.println("test");
   }
+
 }

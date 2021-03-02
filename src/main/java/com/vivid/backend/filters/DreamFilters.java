@@ -14,7 +14,7 @@ public class DreamFilters {
   private static FilterProvider dreamIncludeUserFilter() {
     SimpleBeanPropertyFilter simpleBeanPropertyFilterDream = SimpleBeanPropertyFilter.serializeAllExcept("tones");
     SimpleBeanPropertyFilter simpleBeanPropertyFilterUser = SimpleBeanPropertyFilter.serializeAllExcept("token",
-        "dreams", "themes");
+        "dreams", "themes", "passwordDigest");
     SimpleBeanPropertyFilter simpleBeanPropertyFilterTone = SimpleBeanPropertyFilter.serializeAllExcept("dream");
 
     return new SimpleFilterProvider().addFilter("dreamFilter", simpleBeanPropertyFilterDream).addFilter("userFilter",
