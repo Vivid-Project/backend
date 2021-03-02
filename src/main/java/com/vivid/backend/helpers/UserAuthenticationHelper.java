@@ -1,6 +1,5 @@
 package com.vivid.backend.helpers;
 
-import java.util.List;
 import java.util.Map;
 
 import com.vivid.backend.exceptions.AuthenticationFailedException;
