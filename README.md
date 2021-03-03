@@ -5,7 +5,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-![](https://travis-ci.com/github/Vivid-Project/backend.svg?branch=main)
+[![Build Status](https://travis-ci.com/Vivid-Project/backend.svg?branch=main)](https://travis-ci.com/Vivid-Project/backend)
 <!--   Add in badge :  [![Build Status] -->
 
 
