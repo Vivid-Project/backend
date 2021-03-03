@@ -287,7 +287,7 @@ Response:
 <!-- ROADMAP -->
 ## Roadmap
 
-See [Open Issues](https://github.com/Vivid-Project/microservice/issues) or visit our [Project Board](https://github.com/orgs/Vivid-Project/projects/1) for a list of proposed features, known issues, and project extensions.
+See [Open Issues](https://github.com/Vivid-Project/backend/issues) or visit our [Project Board](https://github.com/orgs/Vivid-Project/projects/1) for a list of proposed features, known issues, and project extensions.
 
 
 <!-- CONTRIBUTING -->
