@@ -61,15 +61,18 @@ To view all the repositories associated with Vivid, please visit [Vivid-Project]
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To properly use this application you will need to set up and configure three repositories. Follow the *Configuration* directions in each repository to get Vivd running locally! Alternatively, check out the production application [here](put front end heroku here)!!!
+To properly use this application you will need to set up and configure three repositories. Follow the *Configuration* directions in each repository to get Vivd running locally! Alternatively, check out the production application [here](https://vivid-project.herokuapp.com/)!  Heroku puts some apps to sleep after a while; if loading the home page fails or times out, refreshing the page should be enough to see the app in production.
 
 ## Prerequisites
 These setup instructions are for Mac OS.
 
 ### Configuration
-
+  * Fork and clone this repo into the directory that will house the Frontend or Microservice repositories.
+  * Install the Maven Command Line tool with Homebrew by entering `brew install maven`
+  * Be sure to have PostgreSQL installed on your machine and create a new database titled `vivid`
 
 ### Usage
+  * Run the server from the command line by entering `mvn spring-boot:run`.  This should seed the Postgres database with prepackaged seed data and allow you to make API calls from a tool such as [Postman](https://www.postman.com/).
 
 #### API Endpoints
 
